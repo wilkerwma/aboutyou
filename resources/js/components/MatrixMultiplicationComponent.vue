@@ -10,9 +10,9 @@
             <thead class="bg-success text-white">
               <th class="text-uppercase text-center">#</th>
               <th
-                v-for="n in resultingMatrix[0].length"
+                v-for="column in resultingMatrix[0].length"
                 class="text-uppercase text-center"
-              >{{ columnLetter(n-1) }}</th>
+              >{{ columnLetter(column-1) }}</th>
             </thead>
             <tbody>
               <tr v-for="(row, rowIndex) in resultingMatrix" :key="rowIndex" class="flex w-100">
@@ -143,17 +143,17 @@ export default {
       this.errors.clear();
       axios
         .post("matrix", this.matrixSetup)
-        .then((res) => {
-          this.resultingMatrix = res.data;
+        .then((response) => {
+          this.resultingMatrix = response.data;
         })
         .catch((error) => {
           this.errors.record(error.response.data.errors);
         });
     },
-    columnLetter(i) {
+    columnLetter(column) {
       return (
-        (i >= 26 ? this.columnLetter(((i / 26) >> 0) - 1) : "") +
-        "abcdefghijklmnopqrstuvwxyz"[i % 26 >> 0]
+        (column >= 26 ? this.columnLetter(((column / 26) >> 0) - 1) : "") +
+        "abcdefghijklmnopqrstuvwxyz"[column % 26 >> 0]
       );
     },
   },

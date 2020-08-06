@@ -31,12 +31,12 @@ class MatrixMultiplicationController extends Controller
     private function multiplyMatrices(array $firstMatrix, array $secondMatrix): array
     {
         $resultingMatrix = array();
-        
-        for ($i = 0; $i < $firstMatrix['rows']; $i++) {
-            for ($j = 0; $j < $secondMatrix['columns']; $j++) {
-                $resultingMatrix[$i][$j] = 0;
-                for ($k = 0; $k < $secondMatrix['rows']; $k++) {
-                    $resultingMatrix[$i][$j] += $firstMatrix['matrix'][$i][$k] * $secondMatrix['matrix'][$k][$j];
+
+        for ($row = 0; $row < $firstMatrix['rows']; $row++) {
+            for ($column = 0; $column < $secondMatrix['columns']; $column++) {
+                $resultingMatrix[$row][$column] = 0;
+                for ($secondaryRow = 0; $secondaryRow < $secondMatrix['rows']; $secondaryRow++) {
+                    $resultingMatrix[$row][$column] += $firstMatrix['matrix'][$row][$secondaryRow] * $secondMatrix['matrix'][$secondaryRow][$column];
                 }
             }
         }
